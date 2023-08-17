@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>django Ajax CRUD</title>
+    <link rel="stylesheet" href="{% static 'enroll\css\bootstrap.css' %}"/> 
+  <body>
+    <div class='container mt-5'>
+      <h2 class="text-center alert-danger">
+        Django Function Based View Ajax Bootstrap 5 CRUD Project
+      </h2>
+      <div class="row">
+        <div class="col-sm-4">
+          <h4 class="text-center alert alert-info">Add/Update
+            Student</h4>
+      <form action="" method="post">
+        {% csrf_token %} 
+        <input type="hidden" name="stuid" id="stuid"/>
+        {{form.as_p}}
+        <input type="button" class="btn btn-success"
+        id='btnsave'
+        value="save"/>
+      </form>
+      <div id='msg' class='alert alert-danger' style='display:none mt-5 '></diV>
+    </div>
+    <div class="col-sm-7">
+      <h4 class="text-center alert alert-info">Show
+        Student Info</h4>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Password</th>
+              <th scope="col">Action</th>
+          </thead>
+          <tbody id="tbody">
+            {%for st in stud %}  
+            <tr>
+              <td>{{st.id}}</td>
+              <td>{{st.name}}</td>
+              <td>{{st.email}}</td>
+              <td>{{st.password}}</td>
+              <td><input 
+                type='button'
+                data-sid="{{st.id}}"
+                class='btn btn-warning btn-sm btn-edit'
+                value="Edit"/>
+                <td><input 
+                  type='button'
+                  data-sid="{{st.id}}"
+                  class='btn btn-danger btn-sm btn-del'
+                  value="Delete"/>
+                  </td>
+  
+                </td>
+
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+  </div>
+ 
+
+   <script src="{% static 'enroll\js\bootstrap.js' %}"></script>
+    <script src="{% static 'enroll\js\popper.js' %}"></script>
+    <script src="{% static 'enroll\js\jquery.js' %}"></script> 
+     {%include 'enroll/ajax.html  '%}
+
+
+  </body>
+</html>
